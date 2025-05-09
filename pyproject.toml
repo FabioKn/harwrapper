@@ -1,0 +1,20 @@
+[project]
+name = "harwrapper"
+version = "0.1.0"
+description = "A wrapper to fix malformed HAR files and convert them using har2warc"
+authors = [
+    {name = "FabioKn"}
+]
+license = {text = "EUPL-1.2"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "click (>=8.1.8,<9.0.0)",
+    "har2warc (>=1.0.4,<2.0.0)",
+    "warcio @ git+https://github.com/FabioKn/warcio.git@timeutils-isoparse",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
