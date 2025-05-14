@@ -63,7 +63,7 @@ def convert_folder(input_dir, output_dir, creator_suffix, verbose):
     else:
         logging.basicConfig(level=logging.WARNING)
 
-    har_files = list(input_dir.rglob("*.har"))
+        har_files = list(input_dir.rglob("*.har"))
     if not har_files:
         click.echo("No HAR files found.")
         return
@@ -73,9 +73,14 @@ def convert_folder(input_dir, output_dir, creator_suffix, verbose):
     for har_file in har_files:
         output_file = output_dir / f"{har_file.stem}.warc.gz"
 
+        if output_file.exists():
+            logging.info(f"{har_file} → {output_file.name} already exists. Skipping.")
+            continue
+
         try:
             with open(har_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
+
 
             if "log" not in data:
                 logging.info(f"{har_file}: 'log' key not found – wrapping input as 'log'")
